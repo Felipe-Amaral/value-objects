@@ -1,0 +1,21 @@
+<?php
+
+namespace App\ValueObjects;
+
+class MoneyToCents
+{
+    private string $str;
+
+    public function __construct(string $str)
+    {
+        $this->str = $str;
+    }
+
+    public function getValue(): string
+    {
+        $result = preg_split('/,|\./', $this->str);
+        $key = array_key_last($result);
+        $result[$key] = str_pad(end($result), 2, "0", STR_PAD_RIGHT);
+        return implode('', $result);
+    }
+}
