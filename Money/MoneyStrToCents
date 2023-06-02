@@ -14,6 +14,7 @@ class MoneyToCents
     public function getValue(): string
     {
         $result = preg_split('/,|\./', $this->str);
+        if (count($result) === 1) return implode('', $result) . '00';
         $key = array_key_last($result);
         $result[$key] = str_pad(end($result), 2, "0", STR_PAD_RIGHT);
         return implode('', $result);
